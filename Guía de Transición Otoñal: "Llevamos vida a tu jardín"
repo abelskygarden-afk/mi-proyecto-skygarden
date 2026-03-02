@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protocolo Profesional de Paisajismo: Otoño en Nordelta - SkyGarden</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!--
+    CONFIRMATION: NEITHER Mermaid JS NOR SVG were used anywhere in the output.
+    PALETTE: "Energetic & Playful" (Deep Purple #2D1B4E, Orange #FF6B35, Teal #00A6A6, Yellow #FFBC42, Off-White #F8F9FA)
+    PLAN SUMMARY:
+    - Section 1: Nordelta Soil Challenge. Goal: Compare clay vs amended soil composition (Donut Chart).
+    - Section 2: Planting Technique. Goal: Inform about "Loma" elevation (HTML/CSS Block Diagram).
+    - Section 3: SkyGarden Biotypes. Goal: Compare the 3 styles' traits (Radar Chart) and list species.
+    - Section 4: AI Assistant integration. Goal: Custom AI generated landscape advice using Gemini API.
+    - Section 5: Autumn Care & Physiology. Goal: Change in nutritional needs NPK (Grouped Bar Chart).
+    -->
+    <style>
+        body {
+            background-color: #F8F9FA;
+            color: #2D1B4E;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .card {
+            background-color: #ffffff;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(45, 27, 78, 0.1), 0 2px 4px -1px rgba(45, 27, 78, 0.06);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-top: 4px solid #00A6A6;
+        }
+        h1, h2, h3 {
+            color: #2D1B4E;
+        }
+        .text-accent-orange { color: #FF6B35; }
+        .text-accent-teal { color: #00A6A6; }
+        .bg-accent-teal { background-color: #00A6A6; }
+        .bg-accent-orange { background-color: #FF6B35; }
+        .bg-accent-purple { background-color: #2D1B4E; }
+        .bg-accent-yellow { background-color: #FFBC42; }
+
+        .loading-spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border-left-color: #00A6A6;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <nav class="bg-accent-purple text-white p-4 sticky top-0 z-50 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="text-2xl font-bold tracking-wider">🌿 SkyGarden</div>
+            <div class="text-sm hidden md:block">Protocolo Otoño 2026 | Nordelta</div>
+        </div>
+    </nav>
+
+    <header class="container mx-auto px-4 py-12 text-center">
+        <h1 class="text-4xl md:text-5xl font-extrabold mb-4">Paisajismo de Autor en Nordelta</h1>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">La llegada del otoño representa la ventana de oportunidad más crítica. Descubre cómo nuestra Dirección Técnica y la ✨ Inteligencia Artificial de SkyGarden garantizan el esplendor de tu jardín.</p>
+    </header>
+
+    <main class="container mx-auto px-4 pb-12">
+
+        <!-- 1. El Desafío del Suelo Pesado -->
+        <section class="mb-12">
+            <div class="card md:grid md:grid-cols-2 gap-8 items-center border-t-accent-orange">
+                <div>
+                    <h2 class="text-3xl font-bold mb-4">1. El Desafío del Suelo Pesado</h2>
+                    <p class="mb-4 text-gray-700 leading-relaxed">
+                        El suelo arcilloso, característico de los rellenos en Nordelta y el Delta, presenta una retención hídrica extrema y baja porosidad. Esto genera un "efecto maceta" que provoca la asfixia radicular de las plantas si no se interviene correctamente.
+                    </p>
+                    <p class="mb-4 text-gray-700 leading-relaxed">
+                        El gráfico muestra la diferencia drástica entre un suelo arcilloso típico de la zona (que retiene demasiada agua y poco oxígeno) y la enmienda estructural que realizamos en SkyGarden.
+                    </p>
+                    <div class="bg-gray-100 p-4 rounded-lg border-l-4 border-accent-orange">
+                        <span class="font-bold text-lg text-accent-orange">Dato Clave:</span> Modificamos el suelo incorporando un 30% de compost orgánico de alta calidad para romper la cohesión de la arcilla.
+                    </div>
+                </div>
+                <div class="mt-8 md:mt-0">
+                    <div class="chart-container">
+                        <canvas id="soilChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Técnica Obligatoria: Elevación en Lomos -->
+        <section class="mb-12">
+            <div class="card border-t-accent-teal">
+                <h2 class="text-3xl font-bold mb-4 text-center">2. Técnica Obligatoria: Elevación en Lomos</h2>
+                <p class="mb-8 text-gray-700 leading-relaxed text-center max-w-4xl mx-auto">
+                    Para combatir el estancamiento de agua, en SkyGarden prohibimos plantar a nivel de superficie. Implementamos la técnica de "Lomas", elevando el cuello de la planta entre 15 y 25 cm.
+                </p>
+                
+                <div class="flex justify-center items-center w-full my-8">
+                    <div class="relative w-full max-w-2xl h-64 bg-blue-50 rounded-xl overflow-hidden border border-blue-100 shadow-inner flex flex-col justify-end items-center">
+                        <div class="absolute top-4 left-4 bg-white p-2 rounded shadow text-sm font-bold text-gray-700 z-10">Lluvia / Riego</div>
+                        <div class="absolute top-8 left-1/2 transform -translate-x-1/2 text-5xl">🌳</div>
+                        
+                        <div class="w-48 h-24 bg-accent-orange rounded-t-full relative z-0 flex justify-center items-end pb-2 border-t-4 border-dashed border-yellow-700" style="background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0,0,0,0.05) 10px, rgba(0,0,0,0.05) 20px);">
+                            <span class="text-white font-bold text-xs px-2 text-center">Loma de Tierra Negra</span>
+                        </div>
+                        
+                        <div class="w-full h-16 bg-gray-400 relative border-t-2 border-gray-500 flex items-center justify-between px-8">
+                            <span class="text-white text-xs font-bold">Suelo Arcilloso Original</span>
+                            <div class="text-blue-200 font-bold text-xs">Escorrentía →</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Biotipos SkyGarden -->
+        <section class="mb-12">
+            <div class="card border-t-accent-purple">
+                <h2 class="text-3xl font-bold mb-4 text-center">3. Biotipos SkyGarden: Selección de Élite</h2>
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div class="chart-container">
+                        <canvas id="biotypeChart"></canvas>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div class="p-4 rounded-lg bg-orange-50 border-l-4 border-accent-orange shadow-sm">
+                            <h3 class="font-bold text-lg text-accent-orange">A. Estructura Mediterránea</h3>
+                            <ul class="list-disc pl-5 text-xs font-medium text-gray-600">
+                                <li>Olea Europaea, Cupressus Totem, Rosas Meilland.</li>
+                            </ul>
+                        </div>
+                        <div class="p-4 rounded-lg bg-yellow-50 border-l-4 border-accent-yellow shadow-sm">
+                            <h3 class="font-bold text-lg text-yellow-700">B. Pradera Contemporánea</h3>
+                            <ul class="list-disc pl-5 text-xs font-medium text-gray-600">
+                                <li>Salvia Leucantha, Pennisetum Rubrum, Stipa.</li>
+                            </ul>
+                        </div>
+                        <div class="p-4 rounded-lg bg-teal-50 border-l-4 border-accent-teal shadow-sm">
+                            <h3 class="font-bold text-lg text-accent-teal">C. Oasis Tropical</h3>
+                            <ul class="list-disc pl-5 text-xs font-medium text-gray-600">
+                                <li>Alocasia, Strelitzia Nicolae, Philodendron.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. ✨ NEW: Asistente de IA SkyGarden ✨ -->
+        <section class="mb-12">
+            <div class="card border-t-accent-yellow bg-gradient-to-br from-white to-yellow-50">
+                <h2 class="text-3xl font-bold mb-4 text-center">✨ Asistente de Paisajismo IA ✨</h2>
+                <p class="text-center text-gray-600 mb-6">Consulta a nuestra IA experta sobre problemas específicos de tu jardín en Nordelta o genera un plan de mantenimiento personalizado.</p>
+                
+                <div class="max-w-2xl mx-auto bg-white p-6 rounded-xl shadow-inner border border-yellow-200">
+                    <div class="mb-4">
+                        <label class="block text-sm font-bold text-gray-700 mb-2">Describe la situación de tu jardín:</label>
+                        <textarea id="ai-prompt" class="w-full h-32 p-4 border rounded-lg focus:ring-2 focus:ring-accent-teal focus:border-transparent" placeholder="Ej: Mi Strelitzia tiene las hojas amarillas y el suelo se ve muy duro..."></textarea>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-4 justify-center">
+                        <button onclick="askGemini('diagnostico')" id="btn-diag" class="bg-accent-teal text-white font-bold py-2 px-6 rounded-full hover:bg-teal-600 transition flex items-center gap-2">
+                            Diagnóstico de Suelo ✨
+                        </button>
+                        <button onclick="askGemini('plan')" id="btn-plan" class="bg-accent-orange text-white font-bold py-2 px-6 rounded-full hover:bg-orange-600 transition flex items-center gap-2">
+                            Plan de Otoño ✨
+                        </button>
+                    </div>
+
+                    <div id="ai-loading" class="hidden flex flex-col items-center mt-6">
+                        <div class="loading-spinner"></div>
+                        <p class="text-sm text-gray-500 mt-2 italic">Gemini está analizando tu jardín...</p>
+                    </div>
+
+                    <div id="ai-result" class="hidden mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200 text-gray-800 text-sm leading-relaxed whitespace-pre-wrap">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Fisiología y Bioestimulación -->
+        <section class="mb-12">
+            <div class="card md:grid md:grid-cols-2 gap-8 items-center border-t-accent-yellow">
+                <div class="order-2 md:order-1 mt-8 md:mt-0">
+                    <div class="chart-container">
+                        <canvas id="nutritionChart"></canvas>
+                    </div>
+                </div>
+                <div class="order-1 md:order-2">
+                    <h2 class="text-3xl font-bold mb-4">5. Fisiología y Bioestimulación</h2>
+                    <p class="mb-4 text-gray-700 leading-relaxed">
+                        El cuidado intensivo de otoño requiere un cambio drástico en la nutrición. Suspendemos el Nitrógeno (N) y priorizamos Potasio (K) para la lignificación.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4 mt-6">
+                        <div class="bg-gray-50 p-3 rounded border border-gray-200 text-center">
+                            <div class="text-2xl mb-1">🛡️</div>
+                            <div class="font-bold text-sm text-accent-purple">Control Fúngico</div>
+                        </div>
+                        <div class="bg-gray-50 p-3 rounded border border-gray-200 text-center">
+                            <div class="text-2xl mb-1">🐜</div>
+                            <div class="font-bold text-sm text-accent-purple">Hormiga Negra</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-accent-purple text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <h3 class="text-2xl font-bold mb-4 text-white">Llevamos vida a tu jardín</h3>
+            <p class="text-sm text-gray-400">© 2026 SkyGarden - Paisajismo de Autor. Dirección Técnica: Abel Bentancourt.</p>
+        </div>
+    </footer>
+
+    <script>
+        const apiKey = ""; // La clave se proporciona en tiempo de ejecución.
+
+        async function askGemini(mode) {
+            const promptInput = document.getElementById('ai-prompt').value;
+            const loading = document.getElementById('ai-loading');
+            const resultDiv = document.getElementById('ai-result');
+            
+            if (!promptInput && mode === 'diagnostico') {
+                resultDiv.classList.remove('hidden');
+                resultDiv.innerText = "Por favor, describe primero el estado de tu planta o suelo.";
+                return;
+            }
+
+            loading.classList.remove('hidden');
+            resultDiv.classList.add('hidden');
+
+            const systemPrompt = `Eres un Ingeniero Agrónomo experto de SkyGarden, especializado en el ecosistema de Nordelta y el Delta argentino (suelos arcillosos de relleno, clima húmedo templado).
+            Tu objetivo es dar consejos profesionales y de autor. 
+            Modo ${mode === 'diagnostico' ? 'DIAGNÓSTICO: Analiza los síntomas y sugiere soluciones basadas en enmiendas de suelo (lomas, arena de río, compost) o control fitosanitario.' : 'PLAN DE OTOÑO: Genera un calendario de tareas (riego, poda, fertilización K) para las especies mencionadas.'}
+            Contexto del Inventario SkyGarden: Olivos, Ciprés Totem, Rosas Meilland, Salvia Leucantha, Pennisetum, Strelitzia Nicolae, Alocasias.
+            Responde de forma concisa, profesional y alentadora. No uses lenguaje genérico.`;
+
+            const fullPrompt = `Consulta del cliente: "${promptInput}". Por favor, brinda una respuesta experta.`;
+
+            const makeRequest = async (retryCount = 0) => {
+                try {
+                    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            contents: [{ parts: [{ text: fullPrompt }] }],
+                            systemInstruction: { parts: [{ text: systemPrompt }] }
+                        })
+                    });
+
+                    if (!response.ok) throw new Error('API Error');
+                    const data = await response.json();
+                    return data.candidates?.[0]?.content?.parts?.[0]?.text;
+                } catch (error) {
+                    if (retryCount < 5) {
+                        const delay = Math.pow(2, retryCount) * 1000;
+                        await new Promise(res => setTimeout(res, delay));
+                        return makeRequest(retryCount + 1);
+                    }
+                    throw error;
+                }
+            };
+
+            try {
+                const text = await makeRequest();
+                loading.classList.add('hidden');
+                resultDiv.classList.remove('hidden');
+                resultDiv.innerText = text;
+            } catch (err) {
+                loading.classList.add('hidden');
+                resultDiv.classList.remove('hidden');
+                resultDiv.innerText = "Hubo un error al conectar con el asistente. Por favor, intenta de nuevo en unos momentos.";
+            }
+        }
+
+        const wrapLabel = (text) => {
+            if(text.length <= 16) return text;
+            const words = text.split(' ');
+            const lines = [];
+            let currentLine = '';
+            words.forEach(word => {
+                if((currentLine + word).length > 16) {
+                    if(currentLine) lines.push(currentLine.trim());
+                    currentLine = word + ' ';
+                } else {
+                    currentLine += word + ' ';
+                }
+            });
+            if(currentLine) lines.push(currentLine.trim());
+            return lines;
+        };
+
+        const tooltipConfig = {
+            tooltip: {
+                callbacks: {
+                    title: function(tooltipItems) {
+                        const item = tooltipItems[0];
+                        let label = item.chart.data.labels[item.dataIndex];
+                        return Array.isArray(label) ? label.join(' ') : label;
+                    }
+                }
+            }
+        };
+
+        const ctxSoil = document.getElementById('soilChart').getContext('2d');
+        new Chart(ctxSoil, {
+            type: 'doughnut',
+            data: {
+                labels: [wrapLabel('Arcilla Retentiva'), wrapLabel('Arena de Río'), wrapLabel('Compost Orgánico')],
+                datasets: [{
+                    data: [60, 10, 30],
+                    backgroundColor: ['#2D1B4E', '#FFBC42', '#FF6B35'],
+                    borderWidth: 2,
+                    borderColor: '#ffffff'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    ...tooltipConfig,
+                    legend: { position: 'bottom' },
+                    title: { display: true, text: 'Enmienda SkyGarden' }
+                }
+            }
+        });
+
+        const ctxBiotype = document.getElementById('biotypeChart').getContext('2d');
+        new Chart(ctxBiotype, {
+            type: 'radar',
+            data: {
+                labels: [wrapLabel('Riego'), wrapLabel('Sol Directo'), wrapLabel('Poda'), wrapLabel('Impacto Arq.'), wrapLabel('Frío')],
+                datasets: [
+                    { label: 'Mediterránea', data: [2, 5, 3, 4, 4], borderColor: '#FF6B35', backgroundColor: 'rgba(255, 107, 53, 0.2)' },
+                    { label: 'Pradera', data: [3, 4, 4, 2, 3], borderColor: '#FFBC42', backgroundColor: 'rgba(255, 188, 66, 0.2)' },
+                    { label: 'Oasis Tropical', data: [5, 2, 2, 5, 2], borderColor: '#00A6A6', backgroundColor: 'rgba(0, 166, 166, 0.2)' }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: { r: { suggestedMin: 0, suggestedMax: 5 } },
+                plugins: { ...tooltipConfig, legend: { position: 'bottom' } }
+            }
+        });
+
+        const ctxNutrition = document.getElementById('nutritionChart').getContext('2d');
+        new Chart(ctxNutrition, {
+            type: 'bar',
+            data: {
+                labels: [wrapLabel('Nitrógeno (N)'), wrapLabel('Fósforo (P)'), wrapLabel('Potasio (K)')],
+                datasets: [
+                    { label: 'Verano', data: [80, 40, 50], backgroundColor: '#FFBC42' },
+                    { label: 'Otoño', data: [10, 70, 90], backgroundColor: '#2D1B4E' }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { ...tooltipConfig, legend: { position: 'bottom' } }
+            }
+        });
+    </script>
+</body>
+</html>
